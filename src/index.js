@@ -14,10 +14,12 @@ const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+let currentColor;
+
 startButton.addEventListener('click', changeColor);
 function changeColor() {
-    setInterval(() => {
-        document.querySelector('body').style.backgroundColor = colors[randomIntegerFromInterval(0, 5)];
+   currentColor = setInterval(() => {
+        document.querySelector('body').style.backgroundColor = colors[randomIntegerFromInterval(0, colors.length-1)];
     }, 1000);
     startButton.disabled = true;
 }
@@ -25,5 +27,6 @@ function changeColor() {
 
 stopButton.addEventListener('click', stopColor);
 function stopColor() {
-   // document.querySelector('body').style.backgroundColor = 
+  clearInterval(currentColor);
+  startButton.disabled = false;
 }
